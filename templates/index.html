@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style.css">
+    <title>Used Car Price Predictor</title>
+</head>
+<body>
+    <div class="container" >
+        <nav id="nav-bar">
+            <div class="nav-title">Used Car Price Predictor</div>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/visuals">Visuals</a>
+            </div>
+        </nav>
+        <div class="content">
+            <form method="POST" action="/submit">
+                <label for="year">Year:</label>
+                <input type="number" id="year" name="year" min="1962" max="2024" required/><br><br>
+                <label for="manufacturer">Manufacturer:</label>
+                <select name="manufacturer" id="manufacturer">
+                    {% for x in __manufacturers %}
+                        <option value="{{ x }}">{{ x }}</option>
+                    {% endfor %}
+                </select><br><br>
+                <label for="type">Type:</label>
+                <select name="type" id="type">
+                    {% for x in __types %}
+                        <option value="{{ x }}">{{ x }}</option>
+                    {% endfor %}
+                </select><br><br>
+                <label for="odometer">Odometer:</label>
+                <input type="number" id="odometer" name="odometer" min="0" max="1000000" required/><br><br>
+                <label for="condition">Condition:</label><br>
+                <input type="radio" id="condition_new" name="condition" value="new">
+                <label for="condition_new">New</label><br>
+                <input type="radio" id="condition_like_new" name="condition" value="like new">
+                <label for="condition_like_new">Like New</label><br>
+                <input type="radio" id="condition_excellent" name="condition" value="excellent" checked>
+                <label for="condition_excellent">Excellent</label><br> 
+                <input type="radio" id="condition_good" name="condition" value="good">
+                <label for="condition_good">Good</label><br>
+                <input type="radio" id="condition_fair" name="condition" value="fair">
+                <label for="condition_fair">Fair</label><br>
+                <input type="radio" id="condition_salvage" name="condition" value="salvage">
+                <label for="condition_salvage">Salvage</label><br><br>
+                <label for="fuel">Engine Type:</label>
+                <select name="fuel" id="fuel">
+                    {% for x in __fuels %}
+                        <option value="{{ x }}">{{ x }}</option>
+                    {% endfor %}
+                </select><br><br>
+                <label for="transmission">Transmission:</label><br>
+                <input type="radio" id="transmission_automatic" name="transmission" value="automatic" checked>
+                <label for="transmission_automatic">Automatic</label><br>
+                <input type="radio" id="transmission_manual" name="transmission" value="manual">
+                <label for="transmission_manual">Manual</label><br><br>
+                <label for="drive">Drivetrain Type:</label><br>
+                <input type="radio" id="drive_rwd" name="drive" value="rwd" checked>
+                <label for="drive_rwd">RWD</label><br>
+                <input type="radio" id="drive_fwd" name="drive" value="fwd">
+                <label for="drive_fwd">FWD</label><br>
+                <input type="radio" id="drive_4wd" name="drive" value="4wd">
+                <label for="drive_4wd">4WD</label><br><br>
+                <label for="paint_color">Color:</label>
+                <select name="paint_color" id="paint_color">
+                    {% for x in __paint_colors %}
+                        <option value="{{ x }}">{{ x }}</option>
+                    {% endfor %}
+                </select><br><br>
+                <label for="state">Which state are you selling your car in?</label>
+                <select name="state" id="state">
+                    {% for x in __states %}
+                        <option value="{{ x }}">{{ x }}</option>
+                    {% endfor %}
+                </select><br><br>
+                <button type="submit" class="btn">Predict price</button>
+                <p class="prediction_text">{{ prediction_text }}</p>
+            </form>
+        </div>    
+    </div>
+</body>
+</html>
